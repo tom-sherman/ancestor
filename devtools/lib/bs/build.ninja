@@ -1,0 +1,14 @@
+rescript = 1
+g_finger := /Users/marcos/Projects/ancestor/node_modules/rescript-nodejs/lib/ocaml/install.stamp
+rule astj
+  command = /Users/marcos/Projects/ancestor/node_modules/rescript/darwin/bsc.exe  -bs-v 9.1.4 -bs-jsx 3  -absname -bs-ast -o $out $i
+o src/Main.ast : astj ../../src/Main.res
+rule deps
+  command = /Users/marcos/Projects/ancestor/node_modules/rescript/darwin/bsb_helper.exe -hash 6fffe76f970de4b8252db557d5143248 $in
+  restat = 1
+o src/Main.d : deps src/Main.ast
+rule mij
+  command = /Users/marcos/Projects/ancestor/node_modules/rescript/darwin/bsc.exe -I src -I /Users/marcos/Projects/ancestor/node_modules/rescript-nodejs/lib/ocaml   -bs-package-name @rescriptbr/ancestor -bs-package-output commonjs:$in_d:.bs.js -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/Main.cmj src/Main.cmi ../../src/Main.bs.js : mij src/Main.ast

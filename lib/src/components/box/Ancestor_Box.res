@@ -37,6 +37,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
 
   @react.component
   let make = (
+    // declare-responsive-props:start
     ~borderRadius=?,
     ~borderTLRadius=?,
     ~borderTRRadius=?,
@@ -126,6 +127,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
     ~textDecorationLine=?,
     ~textDecoration=?,
     ~transform=?,
+    // ancestor-styles:end
     // Box props
     ~columns: option<Styles.responsiveProp<columns>>=?,
     // React props
@@ -370,6 +372,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
           columns->Belt.Option.map(sortValues)->Belt.Option.getWithDefault("")->Maker.css
         `${boxClassName} ${className}`
       }
+      // forward-props:start
       ?borderRadius
       ?borderTLRadius
       ?borderTRRadius
@@ -459,7 +462,8 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
       ?textDecorationLine
       ?textDecoration
       ?transform
-      // DOM Props
+      // forward-responsive-props:end
+      // forward-common-props:start
       tag
       ?id
       ?onSubmit
@@ -693,5 +697,6 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
       ?onAnimationIteration
       ?onTransitionEnd
     />
+    // forward-common-props:end
   }
 }

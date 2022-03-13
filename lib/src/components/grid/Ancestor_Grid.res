@@ -44,6 +44,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
 
   @react.component
   let make = (
+    // declare-responsive-props:start
     ~borderRadius=?,
     ~borderTLRadius=?,
     ~borderTRRadius=?,
@@ -133,14 +134,14 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
     ~textDecorationLine=?,
     ~textDecoration=?,
     ~transform=?,
+    // declaration-responsive-props:end
     // Grid props
     ~spacing: option<Styles.responsiveProp<int>>=?,
     ~tag: Ancestor_React.tags=#div,
-    // React props
+    // declare-common-props:start
     ~children=?,
     ~dangerouslySetInnerHTML=?,
     ~innerRef=?,
-    // DOM Props
     ~className="",
     ~id=?,
     ~onClick=?,
@@ -373,6 +374,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
   ) => {
     <Base
       className={`${grid(~spacing?, ())} ${className}`}
+      // forward-responsive-props:start
       ?borderRadius
       ?borderTLRadius
       ?borderTRRadius
@@ -462,7 +464,8 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
       ?textDecorationLine
       ?textDecoration
       ?transform
-      // DOM Props
+      // forward-responsive-props:end
+      // forward-common-props:start
       tag
       ?id
       ?onSubmit
@@ -696,5 +699,6 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
       ?onAnimationIteration
       ?onTransitionEnd
     />
+    // forward-common-props:end
   }
 }

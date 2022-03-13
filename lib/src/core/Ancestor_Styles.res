@@ -17,9 +17,6 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
           ->Js.Float.toFixedWithPrecision(~digits=1)}rem`
   }
 
-  @ocaml.doc("
-    * Important note on this module
-  ")
   type responsiveProp<'a> = array<Maker.breakpoints<'a>>
 
   let createBreakpointSize = device => `${device->Maker.sizeByBreakpoints->Belt.Int.toString}px`
@@ -52,6 +49,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
     ->Belt.Option.getWithDefault("")
 
   let createResponsiveStyles = (
+    // declare-style-props:start
     ~borderRadius: option<responsiveProp<Radius.t>>=?,
     ~borderTLRadius: option<responsiveProp<Radius.t>>=?,
     ~borderTRRadius: option<responsiveProp<Radius.t>>=?,
@@ -141,6 +139,7 @@ module Make = (Maker: Ancestor_StylesMaker.T) => {
     ~textDecorationLine: option<responsiveProp<TextDecorationLine.t>>=?,
     ~textDecoration: option<responsiveProp<TextDecoration.t>>=?,
     ~transform: option<responsiveProp<Transform.t>>=?,
+    // declare-style-props:end
     (),
   ) =>
     [
